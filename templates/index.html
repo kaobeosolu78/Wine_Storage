@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style>
+		.but{
+            margin: auto;
+        }
+		.table{
+            position:  absolute;
+            top : 100px;
+            left: 650px;
+            width: 300px;
+            height:300px;
+
+        }
+	</style>
+</head>
+<body>
+<div class="table">
+	<table><caption>Wine Shelf</caption>
+		<thead>
+			<tr>
+				<th>Wine</th>
+				<th>Volume</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for name in current_wines %}
+			<tr>
+				<td>{{ name.blend }}</td>
+				<td>{{ name.properties['volume'] }}</td>
+				<td>
+					<a href="/view/{{name.blend}}">Update</a>
+				</td>
+			</tr>
+			{% endfor %}
+		<tr>
+			<td>
+				<form action="/new">
+					<div class="but">
+					<input type="submit" value="Add Wine" name="new_wine">
+					</div>
+				</form>
+			</td>
+			<td>
+				<form action="/graph">
+					<div class="but">
+					<input type="submit" value="Graph">
+					</div>
+				</form>
+			</td>
+		</tr>
+		</tbody>
+			</table>
+	</div>
+
+
+</body>
+</html>

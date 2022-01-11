@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .but {
+            margin-left: 320px;
+            margin-top: auto;
+        }
+        .tb {
+            margin: auto;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table class="tb"><caption>Wine Shelf</caption>
+        <thead>
+            <tr>
+                <th class="tb">Date</th>
+                <th class="tb">ABV</th>
+                <th class="tb">Free S02(calc)</th>
+                {% for att in wine.attributes %}
+                <th class="tb">{{ att }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for date, obs in wine.trait_hist.items() %}
+            <tr>
+                <td>{{date}}</td>
+                <td>{{wine.abv(date)[0]}}</td>
+                <td>{{wine.SO2_interp(date)}}</td>
+                {% for val in obs.values() %}
+                <td>{{ val }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <span>
+        <form class="but" action="/update/quant/{{name}}" method="GET">
+            <input type="submit" value="New Observation" name={{name}}>
+        </form>
+    </span>
+</body>
+</html>
